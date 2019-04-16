@@ -10,10 +10,8 @@ public class Main {
         Utilities.welcomeMsg("Hi!");
         while (true) {
             String input = Utilities.requestString("Please enter a Roman number to translate to english");
-            int total = convertToInteger(input);
-            if (total == -1) {
-                System.out.println("Please enter a valid number!");
-            } else {
+            int total = convertToInteger(input.toUpperCase());
+            if (total != -1) {
                 System.out.println(total);
             }
         }
@@ -21,18 +19,30 @@ public class Main {
 
     public static int convertToInteger(String romanNumeral) {
         List<String> romanNumerals = getRomanNumerals(romanNumeral);
-
-        if (!inDescendingOrder(romanNumerals) ||
-                !isAcceptableCombinations(romanNumerals)
-                || !isAcceptableDoubleSymbol(romanNumerals)
-                || !duplicateDLV(romanNumerals)
+        boolean descendingOrder = inDescendingOrder(romanNumerals);
+        boolean acceptableCombinations = isAcceptableCombinations(romanNumerals);
+        boolean acceptableDoubleCombinations = isAcceptableDoubleSymbol(romanNumerals);
+        boolean duplicateDLV = hasDuplicateDLV(romanNumerals);
+        if (!descendingOrder ||
+                !acceptableCombinations
+                || !acceptableDoubleCombinations
+                || !duplicateDLV
         ) {
+            if (descendingOrder) {
+                System.out.println("Numerals not in descending order!");
+            } else if (acceptableCombinations) {
+                System.out.println("Wrong symbols used to make up number");
+            }else if (acceptableDoubleCombinations) {
+                System.out.println("Illegal Symbol Combinations");
+            }else if (duplicateDLV) {
+                System.out.println("D, L and V can only be used once in the number");
+            }
             return -1;
         }
         return getTotal(romanNumerals);
     }
 
-    private static boolean duplicateDLV(List<String> romanNumerals) {
+    private static boolean hasDuplicateDLV(List<String> romanNumerals) {
         int d = 0, l = 0, v = 0;
         for (String romanNumeral : romanNumerals) {
             for (int j = 0; j < romanNumeral.length(); j++) {
@@ -123,7 +133,7 @@ public class Main {
     }
 
     private static int numeralValue(String numeral) {
-        String s = numeral.toLowerCase();
+        String s = numeral;
         int total = 0;
         if (numeral.length() > 1) {
             total -= getNumeral(s.substring(0, 1));
