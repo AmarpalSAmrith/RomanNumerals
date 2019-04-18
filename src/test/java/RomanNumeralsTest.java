@@ -1,4 +1,4 @@
-import AmarpalAmrith.TrainingMaterials.Main;
+import AmarpalAmrith.TrainingMaterials.RomanNumerals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -15,7 +15,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "I";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(1, result);
@@ -27,7 +27,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "MDCLXVI";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(1666, result);
@@ -39,7 +39,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "MXCD";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(-1,result);
@@ -52,7 +52,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "MCMXCIX";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(1999,result);
@@ -64,7 +64,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "IIX";
 
         //Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         //Assert
         assertEquals(-1, result);
@@ -76,7 +76,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "LXXXXX";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(-1, result);
@@ -88,7 +88,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "XXXXXX";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(60, result);
@@ -100,7 +100,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "IC";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(-1, result);
@@ -113,21 +113,7 @@ public class RomanNumeralsTest {
         String romanNumeral = "XM";
 
         // Act
-        int result = Main.convertToInteger(romanNumeral);
-
-        // Assert
-        assertEquals(-1, result);
-
-    }
-
-    @Test
-    public void testCCanOnlyComeBeforeDM() {
-        // TODO: not possible to have a 2 letter combo that is not CD or CM which are both valid
-        //Arrange
-        String romanNumeral = "CL";
-
-        // Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(-1, result);
@@ -140,7 +126,19 @@ public class RomanNumeralsTest {
         String romanNumeral = "VIV";
 
         //Act
-        int result = Main.convertToInteger(romanNumeral);
+        int result = RomanNumerals.convertToInteger(romanNumeral);
+
+        // Assert
+        assertEquals(-1,result);
+    }
+
+    @Test
+    public void testLCannotAppearMoreThanOnce() {
+        //Arrange
+        String romanNumeral = "LXLV";
+
+        //Act
+        int result = RomanNumerals.convertToInteger(romanNumeral);
 
         // Assert
         assertEquals(-1,result);
